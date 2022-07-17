@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Scene } from "three";
 const container = ref()
 const { onFileInput } = useLoader()
 onMounted(() => {
@@ -11,6 +10,7 @@ onMounted(() => {
 <template>
   <div>
     <div ref="container" class="container">
+      <NuxtLink to="/shader" class="link">shader</NuxtLink>
       <div class="input-box">
         <label for="file" class="input-label">
           ファイルを選択してください
@@ -38,5 +38,11 @@ onMounted(() => {
   background-color: skyblue;
   color: #fff;
   padding: 1.5rem 1.25rem;
+}
+
+.link {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
