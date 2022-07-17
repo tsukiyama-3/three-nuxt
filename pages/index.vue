@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { Scene } from "three";
 const container = ref()
+const { onFileInput } = useLoader()
 onMounted(() => {
   const { init } = useCanvas(container)
   init()
@@ -8,7 +10,14 @@ onMounted(() => {
 
 <template>
   <div>
-    <div ref="container" class="container"></div>
+    <div ref="container" class="container">
+      <div class="input-box">
+        <label for="file" class="input-label">
+          ファイルを選択してください
+        </label>
+        <input type="file" id="file" class="hidden" @input="onFileInput" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,5 +28,15 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  cursor: pointer
+}
+
+.input-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: skyblue;
+  color: #fff;
+  padding: 1.5rem 1.25rem;
 }
 </style>
