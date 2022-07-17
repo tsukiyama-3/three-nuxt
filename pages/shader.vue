@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const container = ref()
+
+const { mouseMoved, mousePressed, mouseReleased } = useMouseEvent(container)
+
 onMounted(() => {
   const { init } = useShader(container)
   init()
@@ -7,8 +10,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container" ref="container">
-    <NuxtLink to="/" class="link">top</NuxtLink>
+  <div class="container" ref="container" @mousemove="mouseMoved" @mousedown="mousePressed" @mouseup="mouseReleased">
+    <!-- <NuxtLink to="/" class="link">top</NuxtLink> -->
   </div>
 </template>
 
