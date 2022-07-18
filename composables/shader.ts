@@ -1,4 +1,4 @@
-import { Scene, OrthographicCamera, WebGLRenderer, PlaneGeometry, ShaderMaterial, Mesh, Vector2 } from "three"
+import { Scene, OrthographicCamera, WebGLRenderer, PlaneGeometry, ShaderMaterial, Mesh, Vector2, Vector3 } from "three"
 
 const _VS = `
 varying vec2 vUv;
@@ -74,6 +74,8 @@ void main(void) {
 // mouse
 const mouse = new Vector2(.5, .5)
 const targetRadius = ref(.005)
+const color = ref()
+color.value = new Vector3(1.0, 1.0, 1.0)
 
 const scene = new Scene()
 export const useShader = (container: any) => {
@@ -160,6 +162,9 @@ export const useMouseEvent = (container) => {
   const mouseReleased = (e) => {
     mouseMoved(e)
     targetRadius.value = .005
+  }
+  const mouseEnter = () => {
+    color.value = new Vector3(1.0, 1.0, 1.0)
   }
   return { mouseMoved, mousePressed, mouseReleased }
 }
