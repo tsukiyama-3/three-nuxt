@@ -1,4 +1,5 @@
 import { Scene, OrthographicCamera, WebGLRenderer, PlaneGeometry, ShaderMaterial, Mesh, Vector2, Vector3 } from "three"
+import type { Ref } from 'vue'
 
 const _VS = `
 varying vec2 vUv;
@@ -78,7 +79,7 @@ const color = ref()
 color.value = new Vector3(1.0, 1.0, 1.0)
 
 const scene = new Scene()
-export const useShader = (container: any) => {
+export const useShader = (container: Ref<HTMLElement>) => {
   const camera = new OrthographicCamera(-1, 1, 1, -1, 0, -1)
   const renderer = new WebGLRenderer()
   const { clientWidth, clientHeight } = container.value
