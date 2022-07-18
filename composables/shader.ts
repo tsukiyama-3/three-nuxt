@@ -29,6 +29,48 @@ void main() {
 }
 `
 
+const _FSS = `
+precision mediump float;
+uniform float uTime;
+uniform vec2  uResolution;
+
+const vec3 red = vec3(1.0, .0, .0);
+const vec3 green = vec3(.0, 1.0, .0);
+const vec3 blue = vec3(.0, .0, 1.0);
+
+void circle(vec2 p, vec2 offset, float size, vec3 color, inout vec3 i) {
+  float l = length(p - offset);
+  if (l < size) {
+    i = color;
+  }
+}
+
+void rect(vec2 p, vec2 offset, float size, vec3 color, inout vec3 i) {
+  vec2 q = (p - offset) / size;
+  if (abs(q.x) < 1.0 && abs(q.y) < 1.0) {
+    i = color;
+  }
+}
+
+void ellipse(vec2 p, vec2 offset, vec2 prop, float size, vec3 color, inout vec3 i) {
+  vec2 q = (p - offset) / prop;
+  if (length(q) < size) {
+    i = color;
+  }
+}
+
+void main(void) {
+  vec3 destColor = vec3(1.0, 1.0, 1.0);
+  vec2 p = (gl_FragCoord.xy * 2.0 - uResolution) / min(uResolution.x, uResolution.y);
+
+  circle(p, vec2(.0, .5), .25, red, destColor);
+  rect(p, vec2(.5, -.5), .25, green, destColor);
+  ellipse(p, vec2(-.5, -.5), vec2(.5, 1.0), .25, blue, destColor);
+  gl_FragColor = vec4(destColor, 1.0);
+}
+
+`
+
 // mouse
 const mouse = new Vector2(.5, .5)
 const targetRadius = ref(.005)
@@ -58,13 +100,16 @@ export const useShader = (container: any) => {
         },
         uRadius: {
           value: targetRadius.value
+        },
+        uResolution: {
+          value: new Vector2(clientWidth, clientHeight)
         }
       }
 
       const material = new ShaderMaterial({
         uniforms: uniforms,
         vertexShader: _VS,
-        fragmentShader: _FS,
+        fragmentShader: _FSS,
         wireframe: false
       })
 
