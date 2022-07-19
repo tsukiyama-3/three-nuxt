@@ -17,6 +17,7 @@ onMounted(() => {
         <NuxtLink to="/shadow">shadow</NuxtLink>
         <NuxtLink to="/camera">camera</NuxtLink>
         <NuxtLink to="/fog">fog</NuxtLink>
+        <NuxtLink to="/group">group</NuxtLink>
       </div>
       <div class="input-box">
         <label for="file" class="input-label">
