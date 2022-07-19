@@ -14,6 +14,7 @@ onMounted(() => {
         <NuxtLink to="/shader">shader</NuxtLink>
         <NuxtLink to="/materialSample">material</NuxtLink>
         <NuxtLink to="/light">light</NuxtLink>
+        <NuxtLink to="/shadow">shadow</NuxtLink>
       </div>
       <div class="input-box">
         <label for="file" class="input-label">
