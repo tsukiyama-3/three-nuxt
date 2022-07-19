@@ -10,8 +10,11 @@ onMounted(() => {
 <template>
   <div>
     <div ref="container" class="container">
-      <NuxtLink to="/shader" class="link">shader</NuxtLink>
-      <NuxtLink to="/materialSample" class="link_second">material</NuxtLink>
+      <div class="links">
+        <NuxtLink to="/shader">shader</NuxtLink>
+        <NuxtLink to="/materialSample">material</NuxtLink>
+        <NuxtLink to="/light">light</NuxtLink>
+      </div>
       <div class="input-box">
         <label for="file" class="input-label">
           ファイルを選択してください
@@ -41,15 +44,9 @@ onMounted(() => {
   padding: 1.5rem 1.25rem;
 }
 
-.link {
+.links {
   position: absolute;
   top: 0;
-  left: 0;
-}
-
-.link_second {
-  position: absolute;
-  top: 20px;
   left: 0;
 }
 </style>
