@@ -1,4 +1,4 @@
-import { BoxGeometry, Mesh, MeshStandardMaterial, NearestFilter, PerspectiveCamera, PlaneGeometry, RepeatWrapping, Scene, SpotLight, TextureLoader, Vector3, WebGLRenderer } from 'three'
+import { BoxGeometry, Mesh, MeshStandardMaterial, NearestFilter, OrthographicCamera, PlaneGeometry, RepeatWrapping, Scene, SpotLight, TextureLoader, Vector3, WebGLRenderer } from 'three'
 import { Ref } from 'vue'
 
 export const useCamera = (container: Ref<HTMLElement>) => {
@@ -13,7 +13,7 @@ export const useCamera = (container: Ref<HTMLElement>) => {
     // シーン作成
     const scene = new Scene()
     // カメラ作成
-    const camera = new PerspectiveCamera(30, clientWidth / clientHeight)
+    const camera = new OrthographicCamera(-480, +480, 270, -270)
     // 光源作成
     const spotLight = new SpotLight(0xffffff, 4, 2000, Math.PI / 5, .2, 1.5)
     spotLight.position.set(500, 300, 500)
