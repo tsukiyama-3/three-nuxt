@@ -1,4 +1,4 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, AmbientLight, DirectionalLight, DirectionalLightHelper } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, AmbientLight, HemisphereLight, HemisphereLightHelper } from 'three'
 import { Ref } from 'vue'
 
 export const useLight = (container: Ref<HTMLElement>) => {
@@ -29,11 +29,11 @@ export const useLight = (container: Ref<HTMLElement>) => {
       )
       meshKnot.position.set(0, 5, 0)
       scene.add(meshKnot)
-      // 平行光源を作成
-      const light = new DirectionalLight(0xffffff, 1)
+      // 半球光源を作成
+      const light = new HemisphereLight(0x888888, 0x0000ff, 1.0)
       scene.add(light)
       // 照明を可視化するヘルパー
-      const lightHelper = new DirectionalLightHelper(light)
+      const lightHelper = new HemisphereLightHelper(light, 5.0)
       scene.add(lightHelper)
       const tick = () => {
         // レンダリング
