@@ -1,4 +1,4 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, AmbientLight, HemisphereLight, HemisphereLightHelper, PointLight, PointLightHelper } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, SpotLight } from 'three'
 import { Ref } from 'vue'
 
 export const useLight = (container: Ref<HTMLElement>) => {
@@ -29,12 +29,9 @@ export const useLight = (container: Ref<HTMLElement>) => {
       )
       meshKnot.position.set(0, 5, 0)
       scene.add(meshKnot)
-      // 点光源を作成
-      const light = new PointLight(0xffffff, 2, 50, 1.0)
+      // スポットライト光源を作成
+      const light = new SpotLight(0xffffff, 4, 50, Math.PI / 4, .5)
       scene.add(light)
-      // 照明を可視化するヘルパー
-      const lightHelper = new PointLightHelper(light)
-      scene.add(lightHelper)
       const tick = () => {
         // レンダリング
         renderer.render(scene, camera)
@@ -45,7 +42,6 @@ export const useLight = (container: Ref<HTMLElement>) => {
         const lz = r * Math.sin(t)
         const ly = 6.0 * 5.0 * Math.sin(t / 3.0)
         light.position.set(lx, ly, lz)
-        lightHelper.update()
         requestAnimationFrame(tick)
       }
       tick()
