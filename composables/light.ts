@@ -1,4 +1,4 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, AmbientLight } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Vector3, Mesh, BoxGeometry, MeshStandardMaterial, TorusKnotGeometry, AmbientLight, DirectionalLight, DirectionalLightHelper } from 'three'
 import { Ref } from 'vue'
 
 export const useLight = (container: Ref<HTMLElement>) => {
@@ -29,11 +29,23 @@ export const useLight = (container: Ref<HTMLElement>) => {
       )
       meshKnot.position.set(0, 5, 0)
       scene.add(meshKnot)
-      // 環境光源作成
-      const light = new AmbientLight(0xffffff, 1.0)
+      // 平行光源を作成
+      const light = new DirectionalLight(0xffffff, 1)
       scene.add(light)
+      // 照明を可視化するヘルパー
+      const lightHelper = new DirectionalLightHelper(light)
+      scene.add(lightHelper)
       const tick = () => {
+        // レンダリング
         renderer.render(scene, camera)
+        // 照明の位置を更新
+        const t = Date.now() / 500
+        const r = 10.0
+        const lx = r * Math.cos(t)
+        const lz = r * Math.sin(t)
+        const ly = 6.0 * 5.0 * Math.sin(t / 3.0)
+        light.position.set(lx, ly, lz)
+        lightHelper.update()
         requestAnimationFrame(tick)
       }
       tick()
