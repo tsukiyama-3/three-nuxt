@@ -19,6 +19,7 @@ onMounted(() => {
         <NuxtLink to="/fog">fog</NuxtLink>
         <NuxtLink to="/group">group</NuxtLink>
         <NuxtLink to="/world-position">world-position</NuxtLink>
+        <NuxtLink to="/three">three</NuxtLink>
       </div>
       <div class="input-box">
         <label for="file" class="input-label">
@@ -37,7 +38,6 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  cursor: pointer
 }
 
 .input-box {
