@@ -7,7 +7,7 @@ const scene = new Scene()
 
 // カメラ追加
 const camera = new PerspectiveCamera(45, 512 / 512)
-camera.position.set(0, 0, 512)
+camera.position.set(0, 0, 628)
 
 // ライト追加
 const light = new AmbientLight(0xffffff, 1.0)
@@ -65,17 +65,35 @@ export const useDot = (mouse, color: Ref<number>) => {
     controls.enablePan = false
     controls.enableRotate = false
     controls.enableZoom = true
-    controls.maxDistance = 512
+    controls.maxDistance = 628
     controls.minDistance = 24
 
     tick()
   }
 
-  const movePlane = () => {
+  const moveLeft = () => {
     planeList.map((plane) => {
       plane.position.x += 8
     })
   }
 
-  return { init, movePlane }
+  const moveRight = () => {
+    planeList.map((plane) => {
+      plane.position.x -= 8
+    })
+  }
+
+  const moveTop = () => {
+    planeList.map((plane) => {
+      plane.position.y -= 8
+    })
+  }
+
+  const moveBottom = () => {
+    planeList.map((plane) => {
+      plane.position.y += 8
+    })
+  }
+
+  return { init, moveLeft, moveRight, moveTop, moveBottom }
 }
