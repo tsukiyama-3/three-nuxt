@@ -8,9 +8,10 @@ const { color } = useColor(colorCode)
 
 const { isClick, clickFlug } = useDraw()
 
+  const { movePlane } = useDot(mouse, color)
 onMounted(() => {
-  const { init } = useDot(container, mouse, color)
-  init()
+  const { init } = useDot(mouse, color)
+  init(container)
 })
 
 const drow = (e) => {
@@ -27,9 +28,10 @@ const hoge = (e) => {
 
 <template>
   <div>
-    <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="isClick">
+    <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="isClick" @click="clickFlug = false">
     </div>
     <input type="color" v-model="colorCode">
+    <div @click="movePlane">+++</div>
   </div>
 </template>
 

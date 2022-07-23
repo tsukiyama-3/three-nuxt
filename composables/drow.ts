@@ -8,6 +8,6 @@ export const useDraw = () => {
   }
   return {
     isClick,
-    clickFlug: readonly(clickFlug)
+    clickFlug
   }
 }
