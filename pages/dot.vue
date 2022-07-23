@@ -2,7 +2,7 @@
 import { Ref } from 'vue'
 
 const container: Ref<HTMLElement | null> = ref(null)
-const { getMousePosition, mouse } = useMouse()
+const { getMousePosition, resetMousePoistion, mouse } = useMouse()
 const colorCode: Ref<string> = ref('#000000')
 const { color } = useColor(colorCode)
 
@@ -29,7 +29,7 @@ const hoge = (e) => {
 
 <template>
   <div>
-    <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="isClick" @click="clickFlug = false">
+    <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="resetMousePoistion" @click="isClick">
     </div>
     <input type="color" v-model="colorCode">
     <div style="display: flex">

@@ -20,8 +20,13 @@ export const useMouse = () => {
     mouse.x.value = (x / w) * 2 - 1
     mouse.y.value = -(y / h) * 2 + 1
   }
+  const resetMousePoistion = () => {
+    mouse.x.value = undefined
+    mouse.y.value = undefined
+  }
   return {
     getMousePosition,
+    resetMousePoistion,
     mouse: readonly(mouse)
   }
 }
