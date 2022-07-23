@@ -53,6 +53,8 @@ export const useDot = (mouse, color: Ref<number>) => {
     requestAnimationFrame(tick)
   }
 
+  const controls = ref()
+
   const init = (container: Ref<HTMLElement>) => {
     watchEffect(() => {
       renderer.value = new WebGLRenderer()
@@ -61,12 +63,12 @@ export const useDot = (mouse, color: Ref<number>) => {
     })
     container.value.appendChild(renderer.value.domElement)
 
-    const controls = new OrbitControls(camera, container.value)
-    controls.enablePan = false
-    controls.enableRotate = false
-    controls.enableZoom = true
-    controls.maxDistance = 628
-    controls.minDistance = 24
+    controls.value = new OrbitControls(camera, container.value)
+    controls.value.enablePan = false
+    controls.value.enableRotate = false
+    controls.value.enableZoom = true
+    controls.value.maxDistance = 628
+    controls.value.minDistance = 24
 
     tick()
   }
@@ -95,5 +97,27 @@ export const useDot = (mouse, color: Ref<number>) => {
     })
   }
 
-  return { init, moveLeft, moveRight, moveTop, moveBottom }
+  const count = ref(0)
+
+  const zoomIn = () => {
+    if (count.value < 24) {
+      camera.position.z -= 8 * Math.sqrt(2) * 2
+      count.value++
+    }
+    console.log(count.value, camera.position.z)
+  }
+
+  const zoomOut = () => {
+    camera.position.z += 8 * Math.sqrt(2) * 2
+  }
+
+  return {
+    init,
+    moveLeft,
+    moveRight,
+    moveTop,
+    moveBottom,
+    zoomIn,
+    zoomOut
+  }
 }

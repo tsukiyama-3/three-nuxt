@@ -8,7 +8,7 @@ const { color } = useColor(colorCode)
 
 const { isClick, clickFlug } = useDraw()
 
-const { moveLeft, moveRight, moveTop, moveBottom } = useDot(mouse, color)
+const { moveLeft, moveRight, moveTop, moveBottom, zoomIn, zoomOut } = useDot(mouse, color)
 
 onMounted(() => {
   const { init } = useDot(mouse, color)
@@ -37,6 +37,8 @@ const hoge = (e) => {
       <div @click="moveRight">→</div>
       <div @click="moveTop">↑</div>
       <div @click="moveBottom">↓</div>
+      <div @click="zoomIn">ZoomIn</div>
+      <div @click="zoomOut">ZoomOut</div>
     </div>
   </div>
 </template>
