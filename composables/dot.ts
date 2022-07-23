@@ -1,24 +1,30 @@
 import { AmbientLight, Mesh, MeshLambertMaterial, PerspectiveCamera, PlaneGeometry, Raycaster, Scene, WebGLRenderer } from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Ref } from 'vue'
 
-import { Mouse } from './mouse'
-
-export const useDot = (container: Ref<HTMLElement>, clientWidth: Ref<number>, clientHeight: Ref<number>, mouse, color: Ref<number>) => {
+export const useDot = (container: Ref<HTMLElement>, mouse, color: Ref<number>) => {
   const init = () => {
     const renderer = new WebGLRenderer()
-    renderer.setSize(clientWidth.value, clientHeight.value)
-    renderer.setPixelRatio(clientWidth.value / clientHeight.value)
+    renderer.setSize(512, 512)
+    renderer.setPixelRatio(512 / 512)
     container.value.appendChild(renderer.domElement)
 
     const scene = new Scene()
 
-    const camera = new PerspectiveCamera(45, clientWidth.value / clientHeight.value)
-    camera.position.set(0, 0, 1000)
+    const camera = new PerspectiveCamera(45, 512 / 512)
+    camera.position.set(0, 0, 512)
+
+    const controls = new OrbitControls(camera, container.value)
+    controls.enablePan = false
+    controls.enableRotate = false
+    controls.enableZoom = true
+    controls.maxDistance = 512
+    controls.minDistance = 1
 
     const geometry = new PlaneGeometry(8, 8, 1, 1)
     const planeList = []
-    const col = ref(0)
-    const row = ref(0)
+    const col = ref(-256)
+    const row = ref(-256)
     for (let i = 0; i <= 64; i++) {
       for (let j = 0; j <= 64; j++) {
         const material = new MeshLambertMaterial({ color: 0xffffff })
@@ -30,7 +36,7 @@ export const useDot = (container: Ref<HTMLElement>, clientWidth: Ref<number>, cl
         planeList.push(plane)
       }
       row.value += 8
-      col.value = 0
+      col.value = -256
     }
 
     const light = new AmbientLight(0xffffff, 1.0)

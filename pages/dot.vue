@@ -2,7 +2,6 @@
 import { Ref } from 'vue'
 
 const container: Ref<HTMLElement | null> = ref(null)
-const { clientWidth, clientHeight } = useWindowSize()
 const { getMousePosition, mouse } = useMouse()
 const colorCode: Ref<string> = ref('#000000')
 const { color } = useColor(colorCode)
@@ -10,7 +9,7 @@ const { color } = useColor(colorCode)
 const { isClick, clickFlug } = useDraw()
 
 onMounted(() => {
-  const { init } = useDot(container, clientWidth, clientHeight, mouse, color)
+  const { init } = useDot(container, mouse, color)
   init()
 })
 
@@ -27,7 +26,17 @@ const hoge = (e) => {
 </script>
 
 <template>
-  <div class="container" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="isClick">
-    <input class="input" type="color" v-model="colorCode">
+  <div>
+    <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="isClick">
+    </div>
+    <input type="color" v-model="colorCode">
   </div>
 </template>
+
+<style scoped>
+.editer {
+  border: 1px solid #000;
+  width: 512px;
+  height: 512px;
+}
+</style>
