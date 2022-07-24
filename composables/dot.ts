@@ -41,6 +41,13 @@ export const useDot = (mouse, color: Ref<string>) => {
 
   // tick
   const tick = () => {
+    dorw()
+    // fill()
+    renderer.value.render(scene, camera)
+    requestAnimationFrame(tick)
+  }
+
+  const dorw = () => {
     raycaster.setFromCamera(mouse, camera)
     const intersects = raycaster.intersectObjects(planeList)
     planeList.map((plane) => {
@@ -48,8 +55,16 @@ export const useDot = (mouse, color: Ref<string>) => {
         plane.material.color.setHex(color.value)
       }
     })
-    renderer.value.render(scene, camera)
-    requestAnimationFrame(tick)
+  }
+
+  const fill = () => {
+    raycaster.setFromCamera(mouse, camera)
+    const intersects = raycaster.intersectObjects(planeList)
+    planeList.map((plane) => {
+      if (plane.material.color.r != 1) {
+        console.log(plane.material.color)
+      }
+    })
   }
 
   const controls = ref()
@@ -69,7 +84,9 @@ export const useDot = (mouse, color: Ref<string>) => {
     controls.value.maxDistance = 628
     controls.value.minDistance = 24
 
-    tick()
+    setInterval(() => {
+      tick()
+    }, 1000)
   }
 
   return {
