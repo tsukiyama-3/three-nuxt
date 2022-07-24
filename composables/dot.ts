@@ -73,44 +73,6 @@ export const useDot = (mouse, color: Ref<number>) => {
     tick()
   }
 
-  const moveLeft = () => {
-    planeList.map((plane) => {
-      plane.position.x += 8
-    })
-  }
-
-  const moveRight = () => {
-    planeList.map((plane) => {
-      plane.position.x -= 8
-    })
-  }
-
-  const moveTop = () => {
-    planeList.map((plane) => {
-      plane.position.y -= 8
-    })
-  }
-
-  const moveBottom = () => {
-    planeList.map((plane) => {
-      plane.position.y += 8
-    })
-  }
-
-  const count = ref(0)
-
-  const zoomIn = () => {
-    if (count.value < 24) {
-      camera.position.z -= 8 * Math.sqrt(2) * 2
-      count.value++
-    }
-    console.log(count.value, camera.position.z)
-  }
-
-  const zoomOut = () => {
-    camera.position.z += 8 * Math.sqrt(2) * 2
-  }
-
   return {
     init
   }
