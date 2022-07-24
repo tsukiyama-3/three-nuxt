@@ -8,8 +8,6 @@ const { color } = useColor(colorCode)
 
 const { isClick, clickFlug } = useDraw()
 
-const { moveLeft, moveRight, moveTop, moveBottom, zoomIn, zoomOut } = useDot(mouse, color)
-
 onMounted(() => {
   const { init } = useDot(mouse, color)
   init(container)
@@ -32,14 +30,6 @@ const hoge = (e) => {
     <div class="editer" ref="container" @mousedown="drow" @mousemove="hoge" @mouseup="resetMousePoistion" @click="isClick">
     </div>
     <input type="color" v-model="colorCode">
-    <div style="display: flex">
-      <div @click="moveLeft">←</div>
-      <div @click="moveRight">→</div>
-      <div @click="moveTop">↑</div>
-      <div @click="moveBottom">↓</div>
-      <div @click="zoomIn">ZoomIn</div>
-      <div @click="zoomOut">ZoomOut</div>
-    </div>
   </div>
 </template>
 

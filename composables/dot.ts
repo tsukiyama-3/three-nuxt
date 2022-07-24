@@ -112,12 +112,6 @@ export const useDot = (mouse, color: Ref<number>) => {
   }
 
   return {
-    init,
-    moveLeft,
-    moveRight,
-    moveTop,
-    moveBottom,
-    zoomIn,
-    zoomOut
+    init
   }
 }
