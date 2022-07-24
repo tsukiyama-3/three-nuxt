@@ -1,12 +1,12 @@
 import { Ref } from 'vue'
 
-const color: Ref<number> = ref()
+const color: Ref<string> = ref()
 
 export const useColor = (colorCode: Ref<string>) => {
   watchEffect(() => {
-    color.value = colorCode.value.slice(1) as unknown as number
+    color.value = '0x' + colorCode.value.slice(1)
   })
   return {
-    color
+    color: readonly(color)
   }
 }

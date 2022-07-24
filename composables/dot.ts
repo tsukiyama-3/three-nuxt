@@ -32,7 +32,7 @@ for (let i = 0; i <= 64; i++) {
   col.value = -256
 }
 
-export const useDot = (mouse, color: Ref<number>) => {
+export const useDot = (mouse, color: Ref<string>) => {
   // レンダラー作成
   const renderer = ref()
 
@@ -42,11 +42,10 @@ export const useDot = (mouse, color: Ref<number>) => {
   // tick
   const tick = () => {
     raycaster.setFromCamera(mouse, camera)
-    const hoge = '0x' + color.value as unknown as string
     const intersects = raycaster.intersectObjects(planeList)
     planeList.map((plane) => {
       if (intersects.length > 0 && plane === intersects[0].object) {
-        plane.material.color.setHex(hoge)
+        plane.material.color.setHex(color.value)
       }
     })
     renderer.value.render(scene, camera)
