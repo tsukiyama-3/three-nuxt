@@ -112,7 +112,7 @@ export const useShader = (container: Ref<HTMLElement>) => {
       const material = new ShaderMaterial({
         uniforms: uniforms,
         vertexShader: _VS,
-        fragmentShader: _FSS,
+        fragmentShader: _FS,
         wireframe: false
       })
 
@@ -124,7 +124,7 @@ export const useShader = (container: Ref<HTMLElement>) => {
         requestAnimationFrame(() => { render() })
         const sec = performance.now() / 1000
         uniforms.uTime.value = sec
-        uniforms.uMouse.value.lerp(mouse, .2)
+        uniforms.uMouse.value.lerp(mouse, 1)
         uniforms.uRadius.value += (targetRadius.value - uniforms.uRadius.value) * 0.2
         renderer.render(scene, camera)
       }
