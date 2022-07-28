@@ -1,4 +1,4 @@
-import { AmbientLight, Mesh, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderer } from 'three'
+import { AmbientLight, Mesh, OrthographicCamera, PlaneGeometry, Scene, ShaderMaterial, Vector2, WebGLRenderer } from 'three'
 import { Ref } from 'vue'
 
 // Shader Material
@@ -11,8 +11,10 @@ const mat = new ShaderMaterial({
     `,
   fragmentShader:
     `
+    uniform vec2 uResolution;
     void main() {
-      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      vec2 position = (gl_FragCoord.xy * 2.0 - uResolution.xy) / min(uResolution.x, uResolution.y);
+      gl_FragColor = vec4(position.x, 0.0, 0.0, 1.0);
     }
     `
 })
@@ -31,6 +33,9 @@ const uniform = {
   uAspect: {
     value: 1
   },
+  uResolution: {
+    value: new Vector2(512, 512)
+  }
 }
 
 // マテリアル
