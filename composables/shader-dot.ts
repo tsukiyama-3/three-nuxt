@@ -11,10 +11,13 @@ const mat = new ShaderMaterial({
     `,
   fragmentShader:
     `
+    uniform float uTime;
     uniform vec2 uResolution;
     void main() {
       vec2 position = (gl_FragCoord.xy * 2.0 - uResolution.xy) / min(uResolution.x, uResolution.y);
-      gl_FragColor = vec4(position.x, 0.0, 0.0, 1.0);
+      float radius = abs(sin(uTime));
+      float color = floor(radius / length(position));
+      gl_FragColor = vec4(color, 0.0, 0.0, 1.0);
     }
     `
 })
@@ -35,6 +38,9 @@ const uniform = {
   },
   uResolution: {
     value: new Vector2(512, 512)
+  },
+  uTime: {
+    value: .0
   }
 }
 
@@ -59,6 +65,8 @@ export const useShaderDot = () => {
 
   const tick = () => {
     renderer.value.render(scene, camera)
+    const sec = performance.now() / 1000
+    uniform.uTime.value = sec
     requestAnimationFrame(tick)
   }
 
