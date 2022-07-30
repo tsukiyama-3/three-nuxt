@@ -14,28 +14,17 @@ const mat = new ShaderMaterial({
     uniform float uTime;
     uniform vec2 uResolution;
 
-    bool circle(vec2 position, float radius) {
-      if (length(position) <= radius) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
     void main() {
       vec2 position = (gl_FragCoord.xy * 2.0 - uResolution.xy) / min(uResolution.x, uResolution.y);
-      position.x -= uTime /1.5;
-      position.y += uTime /1.5;
-      position.x = sin(position.x * 10.0);
-      position.y = sin(position.y * 10.0);
+      position.y -= uTime / 1.5;
       vec4 distColor;
-      vec4 backgroundColor = vec4(1.0, .0, .25, 1.0);
-      float radius = .5;
-      vec4 circleColor = vec4(.0, .0, .5, 1.0);
-      if (circle(position, radius)) {
-        distColor = circleColor;
+      float background = step(.0, sin(position.x * 12.5) * sin(position.y * 12.5));
+      if (background == 1.0) {
+        vec4 color = vec4(vec3(1.0), 1.0);
+        distColor = color;
       } else {
-        distColor = backgroundColor;
+        vec4 color = vec4(.0, .0, .0, 1.0);
+        distColor = color;
       }
       gl_FragColor = distColor;
     }
