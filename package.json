@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "nuxt": "^3.13.0",
+    "three": "^0.168.0",
     "vue": "latest"
   },
   "devDependencies": {
