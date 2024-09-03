@@ -12,6 +12,7 @@
     "lintfix": "eslint --ext .js,.ts,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
+    "@types/three": "^0.168.0",
     "nuxt": "^3.13.0",
     "three": "^0.168.0",
     "vue": "latest"

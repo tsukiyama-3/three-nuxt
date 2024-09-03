@@ -5,5 +5,8 @@ export default defineNuxtConfig({
   postcss: {
     plugins: { tailwindcss: {} },
   },
+  imports: {
+    dirs: ['composables/first'],
+  },
   css: ['~/assets/css/tailwind.css'],
 })

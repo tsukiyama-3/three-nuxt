@@ -10,7 +10,7 @@ export const useThree = (container: Ref<HTMLElement | null>) => {
     renderer.setSize(window.innerWidth, window.innerHeight)
 
     // refで取得したHTML要素にThree.jsのレンダラーを追加
-    container.value.appendChild(renderer.domElement)
+    container.value?.appendChild(renderer.domElement)
 
     // ジオメトリとマテリアルの作成
     const geometry = new THREE.BoxGeometry()
