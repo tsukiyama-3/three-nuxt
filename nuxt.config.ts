@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     plugins: { tailwindcss: {} },
   },
   imports: {
-    dirs: ['composables/first'],
+    dirs: ['composables/*'],
   },
   css: ['~/assets/css/tailwind.css'],
 })
